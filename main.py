@@ -4,8 +4,6 @@ import twitter_client
 import tokens
 
 if __name__ == "__main__":
-	client = twitter_client.TwitterClient(authenticator.Authenticator(
-		tokens.CONSUMER_KEY, tokens.CONSUMER_SECRET, 
-		tokens.ACCESS_TOKEN, tokens.ACCESS_TOKEN_SECRET).authenticate())
+	client = twitter_client.TwitterClient()
 
-	print(client.get_timeline())
+	print(client.get_timeline("pycon", 5))
