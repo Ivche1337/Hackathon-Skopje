@@ -13,20 +13,26 @@ def index():
 @ask.launch
 def new_ask():
         return statement("Hi!")
-#    welcome = render_template('welcome')
-#    reprompt = render_template('reprompt')
-#    return question(welcome) \
-#        .reprompt(reprompt)
 
 @ask.intent('ReadTweets')
-def read_post():
-	return statement(TwitterClient().get_timeline(num_of_posts = 3))
+def read_post(user_id):
+	return statement(TwitterClient().get_timeline(user_id, num_of_posts = 5))
 
 @ask.intent('PostTweet')
 def post_tweet(tweet):
         print(tweet)
         return statement(TwitterClient().post_status(tweet))
-	
+
+
+@ask.intent('AMAZON.StopIntent')
+def stop():
+    return statement("Goodbye!")
+
+
+@ask.intent('AMAZON.CancelIntent')
+def cancel():
+	return statement("Okay")
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
