@@ -18,3 +18,6 @@ class TwitterClient():
 
 		return self.posts
 
+	def post_status(self, post):
+		self.api.update_status(status = post)
+
