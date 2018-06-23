@@ -17,9 +17,14 @@ def new_ask():
     return question(welcome) \
         .reprompt(reprompt)
 
-@ask.intent('ReadTwitterPost')
-def readPost():
+@ask.intent('ReadTweets')
+def read_post():
 	return statement(TwitterClient().get_timeline(num_of_posts = 3))
+
+@ask.intent('QPostTweet')
+def post_tweet():
+	return question("Do you want me to post something on your twitter feed")
+	
 
 if __name__ == '__main__':
 	app.run(debug=True)
