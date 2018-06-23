@@ -16,7 +16,7 @@ def new_ask():
 
 @ask.intent('ReadTweets')
 def read_post(user_id):
-	return statement(TwitterClient().get_timeline(user_id, num_of_posts = 5))
+	return statement(TwitterClient().get_timeline(user_id, num_of_posts = 10))
 
 @ask.intent('PostTweet')
 def post_tweet(tweet):

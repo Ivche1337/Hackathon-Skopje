@@ -17,9 +17,9 @@ class TwitterClient():
 			posts.append(post)
 		posts_string = "...".join([i for i in posts])
 		if user_id != None:
-			post_string = "Reading " + str(num_of_posts) + " tweets " + self.api.get_user(user_id).screen_name + " made ..." + posts_string
+			post_string = "Reading top tweets " + self.api.get_user(user_id).screen_name + " made ..." + posts_string
 		else:
-			post_string = "Reading " + str(num_of_posts) + " tweets you made..." + posts_string
+			post_string = "Reading top tweets you made..." + posts_string
 
 		post_string = re.sub(r"http\S+", "", post_string)
 		return post_string
