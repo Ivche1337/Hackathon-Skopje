@@ -37,8 +37,7 @@ def get_verification():
 
 @app.route("/start")
 def start():
-	api = db['api']
-	return("You are connected!")
+	return("You are all set!")
 
 @ask.launch
 def new_ask():
@@ -52,7 +51,7 @@ def read_post(user_id):
 def post_tweet(tweet):
     return statement(TwitterClient(db['access_token_key'],db["access_token_secret"]).post_status(tweet))
 
-@ask.intent('StreamTweets')
+@ask.intent('SearchTweets')
 def stream_tweet(hashtag):
 	return statement(TwitterClient(db['access_token_key'],db["access_token_secret"]).get_tweets(hashtag, num_of_posts = 20))
 
