@@ -1,6 +1,7 @@
 import tweepy
 import tokens
 import authenticator
+import re
 
 class TwitterClient():
 
@@ -12,12 +13,15 @@ class TwitterClient():
 	def get_timeline(self, user_id=None, num_of_posts=1):
 		posts = []
 		for status in tweepy.Cursor(self.api.user_timeline, id=user_id).items(num_of_posts):
-			posts.append(status._json["text"])
+			post = status._json["text"]
+			posts.append(post)
 		posts_string = "...".join([i for i in posts])
 		if user_id != None:
 			post_string = "Reading " + str(num_of_posts) + " tweets " + self.api.get_user(user_id).screen_name + " made ..." + posts_string
 		else:
 			post_string = "Reading " + str(num_of_posts) + " tweets you made..." + posts_string
+
+		post_string = re.sub(r"http\S+", "", post_string)
 		return post_string
 
 
