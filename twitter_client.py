@@ -7,7 +7,7 @@ class TwitterClient():
 
 	def __init__(self):
 		self.auth = authenticator.Authenticator(tokens.CONSUMER_KEY, tokens.CONSUMER_SECRET, 
-												tokens.ACCESS_TOKEN, tokens.ACCESS_TOKEN_SECRET).authenticate()
+							tokens.ACCESS_TOKEN, tokens.ACCESS_TOKEN_SECRET).authenticate()
 		self.api = tweepy.API(self.auth)
 
 	def get_timeline(self, user_id=None, num_of_posts=1):

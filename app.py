@@ -22,9 +22,10 @@ def new_ask():
 def read_post():
 	return statement(TwitterClient().get_timeline(num_of_posts = 3))
 
-#@ask.intent('QPostTweet')
-#def post_tweet():
-#	return question("Do you want me to post something on your twitter feed")
+@ask.intent('PostTweet')
+def post_tweet(tweet):
+        print(tweet)
+        return statement(TwitterClient().post_status(tweet))
 	
 
 if __name__ == '__main__':
