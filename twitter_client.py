@@ -9,15 +9,21 @@ class TwitterClient():
 												tokens.ACCESS_TOKEN, tokens.ACCESS_TOKEN_SECRET).authenticate()
 		self.api = tweepy.API(self.auth)
 
-	def get_timeline(self, user_id=None, num_of_posts=5):
-		self.user_id = user_id
-		self.num_of_posts = num_of_posts
-		self.posts = dict()
+	def get_timeline(self, user_id=None, num_of_posts=1):
+		posts = []
 		for status in tweepy.Cursor(self.api.user_timeline, id=user_id).items(num_of_posts):
-			self.posts[status._json["user"]["name"]] = status._json["text"]
+			posts.append(status._json["text"])
+		posts_string = "...".join([i for i in posts])
+		if user_id != None:
+			post_string = "Reading " + str(num_of_posts) + " tweets " + self.api.get_user(user_id).screen_name + " made ..." + posts_string
+		else:
+			post_string = "Reading " + str(num_of_posts) + " tweets you made..." + posts_string
+		return post_string
 
-		return self.posts
 
 	def post_status(self, post):
-		self.api.update_status(status = post)
-
+		try:
+			if self.api.update_status(status = post):
+				return "Post Successful"
+		except tweepy.error.TweepError as e:
+			return "Post not successful"
